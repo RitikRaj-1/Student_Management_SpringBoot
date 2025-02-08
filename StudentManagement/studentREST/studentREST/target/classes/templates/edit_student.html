@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management CRUD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" th:href="@{/students}">Student Management CRUD</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/students}">Students</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container">
+    <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+        <h1>Update New Student</h1>
+        <div class="card-body">
+            <form th:action="@{/students/update/{id} (id=${student.id})}" th:object="${student}" method="POST">
+                <!-- Student Fields -->
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Enter Student Name">
+                    <div th:if="${#fields.hasErrors('name')}" class="text-danger">
+                        <span th:errors="*{name}">Error Message</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Student Class</label>
+                    <input type="text" th:field="*{classNumber}" class="form-control" placeholder="Enter Student Class">
+                    <div th:if="${classNumberError != null}" class="text-danger">
+                        <span th:text="${classNumberError}">Error Message</span>
+                    </div>
+                    <div th:if="${#fields.hasErrors('classNumber') && classNumberError == null}" class="text-danger">
+                        <span th:errors="*{classNumber}">Error Message</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Student Age</label>
+                    <input type="text" th:field="*{age}" class="form-control" placeholder="Enter Student Age">
+                    <div th:if="${ageError != null}" class="text-danger">
+                        <span th:text="${ageError}">Error Message</span>
+                    </div>
+                    <div th:if="${#fields.hasErrors('age') && ageError == null}" class="text-danger">
+                        <span th:errors="*{age}">Error Message</span>
+                    </div>
+                </div>
+
+
+                <!-- Address Fields -->
+                <h3>Address Information</h3>
+                <div class="form-group">
+                    <label>Street</label>
+                    <input type="text" th:field="*{address.street}" class="form-control" placeholder="Enter Street">
+                    <div th:if="${#fields.hasErrors('address.street')}" class="text-danger">
+                        <span th:errors="*{address.street}">Error Message</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" th:field="*{address.city}" class="form-control" placeholder="Enter City">
+                    <div th:if="${#fields.hasErrors('address.city')}" class="text-danger">
+                        <span th:errors="*{address.city}">Error Message</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Pin</label>
+                    <input type="text" th:field="*{address.pin}" class="form-control" placeholder="Enter Pin Code">
+                    <div th:if="${#fields.hasErrors('address.pin')}" class="text-danger">
+                        <span th:errors="*{address.pin}">Error Message</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" th:field="*{address.state}" class="form-control" placeholder="Enter State">
+                    <div th:if="${#fields.hasErrors('address.state')}" class="text-danger">
+                        <span th:errors="*{address.state}">Error Message</span>
+                    </div>
+                </div>
+                <br>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
